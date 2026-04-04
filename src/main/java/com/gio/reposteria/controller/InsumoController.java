@@ -1,6 +1,7 @@
 package com.gio.reposteria.controller;
 
 import com.gio.reposteria.model.Insumo;
+import com.gio.reposteria.repository.InsumoRepository;
 import com.gio.reposteria.service.InsumoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class InsumoController {
 
     private final InsumoService service;
+    private final InsumoRepository repository;
 
     @GetMapping
     public List<Insumo> listar() {
@@ -34,5 +36,10 @@ public class InsumoController {
     @GetMapping("/{id}")
     public Insumo obtener(@PathVariable Long id) {
         return service.buscarPorId(id);
+    }
+
+    @GetMapping("/alertas")
+    public List<Insumo> obtenerAlertasStock() {
+        return repository.encontrarInsumosEnAlerta();
     }
 }

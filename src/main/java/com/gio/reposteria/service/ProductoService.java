@@ -51,4 +51,9 @@ public class ProductoService {
     public void eliminar(Long id) {
         productoRepository.deleteById(id);
     }
+
+    public Producto buscarPorId(Long id) {
+        return productoRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Producto no encontrado con ID: " + id));
+    }
 }
