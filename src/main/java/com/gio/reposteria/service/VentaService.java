@@ -32,6 +32,10 @@ public class VentaService {
 
             double subtotal = producto.getPrecioVenta() * itemVenta.getCantidad();
             itemVenta.setSubtotal(subtotal);
+            // Congelo el costo y calculo la ganancia limpia
+            itemVenta.setCostoUnitarioHistorico(producto.getCostoProduccion());
+            double ganancia = subtotal - (producto.getCostoProduccion() * itemVenta.getCantidad());
+            itemVenta.setGananciaSubtotal(ganancia);
             totalVenta += subtotal;
 
             if (producto.getReceta() != null) {
@@ -56,5 +60,11 @@ public class VentaService {
 
     public List<Venta> listarVentas() {
         return ventaRepository.findAll();
+    }
+
+    public List<Venta> obtenerVentasPorFecha(LocalDateTime inicio, LocalDateTime fin) {
+        if (inicio.isAfter(fin)) throw new IllegalArgumentException("Fecha inicio inválida");
+
+        return ventaRepository.findByFechaHoraBetween(inicio, fin);
     }
 }

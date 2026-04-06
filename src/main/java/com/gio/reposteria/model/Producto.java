@@ -25,7 +25,7 @@ public class Producto {
     private double precioVenta;
 
     // Si borramos un producto, se borra su receta.
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ItemReceta> receta = new ArrayList<>();
 
     public void agregarIngrediente(ItemReceta item) {

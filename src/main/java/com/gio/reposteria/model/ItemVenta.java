@@ -27,4 +27,7 @@ public class ItemVenta {
     private int cantidad;
 
     private double subtotal; // cantidad * precioVenta del producto
+    // Congelar costo en el tiempo
+    private double costoUnitarioHistorico;
+    private double gananciaSubtotal;
 }
